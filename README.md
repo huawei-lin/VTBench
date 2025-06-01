@@ -2,8 +2,10 @@
 <div align="center">
   
 [![Static Badge](https://img.shields.io/badge/VTBench-yellow?logoSize=4&label=%F0%9F%A4%97%20Dataset&labelColor=gray&link=https%3A%2F%2Fhuggingface.co%2Fdatasets%2Fhuaweilin%2FVTBench)](https://huggingface.co/datasets/huaweilin/VTBench)&nbsp;
-[![Static Badge](https://img.shields.io/badge/VTBench-%23157bf9?label=%F0%9F%A4%97%20Demo&labelColor=gray&link=https%3A%2F%2Fhuggingface.co%2Fspaces%2Fhuaweilin%2FVTBench)](https://huggingface.co/spaces/huaweilin/VTBench)&nbsp;
-[![Static Badge](https://img.shields.io/badge/huawei--lin%2FVTBench-blue?label=Code&labelColor=gray&link=https%3A%2F%2Fgithub.com%2Fhuawei-lin%2FVTBench%2Ftree%2Fmain)](https://github.com/huawei-lin/VTBench/tree/main)
+[![Static Badge](https://img.shields.io/badge/VTBench-pink?label=%F0%9F%A4%97%20Demo&labelColor=gray&link=https%3A%2F%2Fhuggingface.co%2Fspaces%2Fhuaweilin%2FVTBench)](https://huggingface.co/spaces/huaweilin/VTBench)&nbsp;
+[![Static Badge](https://img.shields.io/badge/huawei--lin%2FVTBench-blue?label=Code&labelColor=gray&link=https%3A%2F%2Fgithub.com%2Fhuawei-lin%2FVTBench%2Ftree%2Fmain)](https://github.com/huawei-lin/VTBench/tree/main)&nbsp;
+[![Static Badge](https://img.shields.io/badge/2505.13439-red?label=arXiv%20Paper)](https://arxiv.org/abs/2505.13439)
+
 
 
 </div>
@@ -15,6 +17,7 @@ Our goal is to encourage the development of **strong, general-purpose open-sourc
 
 ## 🔥 News
 
+- **May 19, 2025:** Our paper is now available on arXiv! [Read it here](https://arxiv.org/abs/2505.13439)
 - **May 18, 2025:** We released the [demo on huggingface space](https://huggingface.co/spaces/huaweilin/VTBench)! Pick your favorite image and try out over 20+ visual tokenizers. [[link](https://huggingface.co/spaces/huaweilin/VTBench)]
 
 
@@ -41,12 +44,13 @@ VTBench isolates and evaluates VT quality, independent of the downstream model, 
 - Supports VTs from models like **FlowMo**, **MaskBiT**, **OpenMagViT2**, **VAR**, **BSQ-ViT**, etc.
 - Includes baselines from **continuous VAEs** (e.g., SD3.5L, FLUX.1) and GPT-4o.
 - Metrics: PSNR, SSIM, LPIPS, FID, CER, WER
+- ✅ **Automatic download of all datasets and models** -- no manual setup required.
 
 ![Overview of VTBench](./assets/overview.png)
 
 ## 📑 Open-Source Plan
-- [x] Huggingface Space Demo (Developing)
-- [ ] VTBench arXiv Paper
+- [x] Huggingface Space Demo
+- [x] VTBench arXiv Paper
 - [x] Evaluation Code
 - [x] Inference Code on Supported VTs
 - [x] VTBench Dataset
@@ -68,6 +72,10 @@ pip install -r requirements.txt
 ```
 
 ### 3. Select a VT and Run Evaluation
+
+> ✅ **No Manual Downloads Needed**  
+All datasets and models are automatically downloaded during runtime from Hugging Face. You can directly run experiments without manually downloading any files.
+
 #### 📦 Model Zoo
 | Code Name           | Display Name      |
 | ------------------- | ----------------- |
@@ -154,5 +162,13 @@ For SLURM users, adapt `examples/submit.sh` accordingly and uncomment the SLURM 
 
 If you find this project useful, please consider citing:
 ```
-None
+@article{vtbench,
+  author       = {Huawei Lin and
+                  Tong Geng and
+                  Zhaozhuo Xu and
+                  Weijie Zhao},
+  title        = {VTBench: Evaluating Visual Tokenizers for Autoregressive Image Generation},
+  journal      = {arXiv preprint arXiv:2502.01634},
+  year         = {2025}
+}
 ```
