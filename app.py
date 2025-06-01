@@ -109,6 +109,7 @@ with gr.Blocks() as demo:
     gr.Markdown("## VTBench")
     gr.Markdown("---")
 
+    gr.Markdown("<span style='color:red; font-weight: bold;'>⚠️ ⚠️ ⚠️  If you encounter any errors, please try again — it usually works on the second attempt.</span>")
     gr.Markdown("👋 **Welcome to VTBench!** Upload an image, select models, and click 'Start Processing' to compare results side by side.")
     gr.Markdown("🔗 **Check out our GitHub repo:** [https://github.com/huawei-lin/VTBench](https://github.com/huawei-lin/VTBench)")
     with gr.Accordion("📘 Full Instructions", open=False):
@@ -120,7 +121,7 @@ with gr.Blocks() as demo:
 - Click **Start Processing** to run inference.
 - Selected model outputs appear first, others show placeholders.
 
-⚠️ *Each model is downloaded on first use. Please wait patiently the first time you run a model.*
+⚠️  *Each model is downloaded on first use. Please wait patiently the first time you run a model.*
 """)
 
     image_input = gr.Image(
@@ -151,7 +152,7 @@ with gr.Blocks() as demo:
                 ex_img.select(fn=make_loader(), outputs=image_input)
 
     gr.Markdown("---")
-    gr.Markdown("⚠️ **The more models you select, the longer the processing time will be.**")
+    gr.Markdown("⚠️  **The more models you select, the longer the processing time will be.**")
     gr.Markdown("*Note: Each model is downloaded on first use. Subsequent uses will load from cache and run faster.*")
 
     display_names = list(model_name_mapping.values())
