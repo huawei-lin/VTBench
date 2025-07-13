@@ -62,27 +62,26 @@ def pil_to_tensor(
 
 
 def tensor_to_pil(chw_tensor: torch.Tensor, standardize=True, **kwarg) -> PIL.Image:
-    # Ensure detachment and move tensor to CPU.
-    detached_chw_tensor = chw_tensor.detach().cpu()
+    # Ensure tensor is on CPU and detached (avoid if already satisfied)
+    if chw_tensor.device.type != "cpu" or chw_tensor.requires_grad:
+        chw_tensor = chw_tensor.detach().cpu()
 
-    # Normalize tensor to [0, 1] range from [-1, 1] range.
+    # Normalize tensor to [0,1]
     if standardize:
-        normalized_chw_tensor = (
-            torch.clamp(detached_chw_tensor, -1.0, 1.0) + 1.0
-        ) / 2.0
+        chw_tensor = torch.clamp(chw_tensor, -1.0, 1.0).add_(1).div_(2)
     else:
-        normalized_chw_tensor = torch.clamp(detached_chw_tensor, 0.0, 1.0)
+        chw_tensor = torch.clamp(chw_tensor, 0.0, 1.0)
 
-    # Permute CHW tensor to HWC format and convert to NumPy array.
-    hwc_array = normalized_chw_tensor.permute(1, 2, 0).numpy()
+    # Convert to HWC; make contiguous for fast numpy conversion
+    hwc = chw_tensor.permute(1, 2, 0).contiguous()
 
-    # Convert to an 8-bit unsigned integer format.
-    image_array_uint8 = (hwc_array * 255).astype(np.uint8)
+    # Convert to numpy and uint8 in one step
+    array = hwc.mul(255).to(torch.uint8).numpy()
 
-    # Convert NumPy array to PIL Image.
-    pil_image = Image.fromarray(image_array_uint8)
+    # Convert NumPy array directly to PIL Image.
+    pil_image = Image.fromarray(array)
 
-    # Convert image to RGB if it is not already.
+    # Convert image to RGB only if needed
     if pil_image.mode != "RGB":
         pil_image = pil_image.convert("RGB")
 
