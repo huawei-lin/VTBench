@@ -1,4 +1,5 @@
 import base64
+import os
 from torchvision.transforms.functional import to_pil_image
 from openai import OpenAI
 import io
@@ -10,7 +11,7 @@ from ...data_processing import tensor_to_pil, pil_to_tensor
 
 class GPTImage:
     def __init__(self, data_params):
-        self.client = OpenAI(organization="org-xZTnLOf1k9s04LEoKKjl4jOB")
+        self.client = OpenAI(organization=os.getenv("OPENAI_ORG_KEY", None))
         self.prompt = "Please recreate the exact same image without any alterations. Please preserve the original resolution (1024*1024)."
         self.data_params = data_params
 
